@@ -96,3 +96,7 @@ $calculcarBotonPromedio.onclick = function() {
     document.querySelector("#edades-familia").appendChild(resultado);
 
 }
+
+
+
+
