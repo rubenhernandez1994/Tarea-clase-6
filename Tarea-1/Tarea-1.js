@@ -19,20 +19,13 @@ function crearArray(numeros, array){
 
 $botonNumeroMiembros.onclick = function(){
     const numeroMiembros = Number(document.querySelector("#cantidad-miembros-familia").value);
-    document.querySelector("#formularios").innerHTML = '';
-
-    for (let i = 1; i <= numeroMiembros; i++){
-        let formulario = document.createElement('form');
-        formulario.innerHTML = 
-            `<h3>Edades del familiar ${i}</h3>`
-            + '<input type="number" class="edad-miembro" placeholder="Ingresá numero de miembros">';
-
-        document.querySelector("#formularios").appendChild(formulario);     
-
+    const error = validarNumeroMiembros(numeroMiembros);
+    if (error) {
+        alert(error);
+        return false;
     }
+    agregarMiembros()
     
-    return false;
-
 }
 
 $botonBorrarFormularios.onclick = function() {
@@ -97,6 +90,29 @@ $calculcarBotonPromedio.onclick = function() {
 
 }
 
+function validarNumeroMiembros(numeroMiembros){
+    if (numeroMiembros <= 0) {
+        return "Este campo no puede estar vacío";
+    }
+    return "";
+
+}
 
 
+function agregarMiembros(){
+    const numeroMiembros = Number(document.querySelector("#cantidad-miembros-familia").value);
+    document.querySelector("#formularios").innerHTML = '';
 
+    for (let i = 1; i <= numeroMiembros; i++){
+        let formulario = document.createElement('form');
+        formulario.innerHTML = 
+            `<h3>Edades del familiar ${i}</h3>`
+            + '<input type="number" class="edad-miembro" placeholder="Ingresá numero de miembros">';
+
+        document.querySelector("#formularios").appendChild(formulario);     
+
+    }
+    
+    return false;
+
+}
