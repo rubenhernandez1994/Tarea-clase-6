@@ -40,31 +40,23 @@ function agregarCampoInteraccionAFormulario($formularioSalario, nombreCampo) {
 
 
 $calculoSalarios.onclick = function(e){
-  document.querySelector("#errores").innerHTML = ''
   const salarios = $salarioFamiliar.querySelectorAll(".salario");
   let sumaSalarios = 0;
   let contadorSalariosValidos = 0;
   let salarioMinimo = Number.POSITIVE_INFINITY
   let salarioMaximo = Number.NEGATIVE_INFINITY
 
-
   for(let i = 0; i < salarios.length; i++){
-    let salario = salarios[i].value.trim();
-    const error = validarSalarios([salario]);
-    if (error){
-        let mensajeError = document.createElement('p');
-        mensajeError.innerHTML = error;
-        document.querySelector("#errores").appendChild(mensajeError);
-        return;
-    }
-    if (salario !== "" && !isNaN(Number(salario))) {
+      let salario = salarios[i].value.trim() ;
+      if (salario !== "" && !isNaN(Number(salario))) {
         sumaSalarios += Number(salario);
         contadorSalariosValidos++;
 
-        salarioMinimo = Math.min(salarioMinimo, Number(salario));
-        salarioMaximo = Math.max(salarioMaximo, Number(salario));
+        salarioMinimo = Math.min(salarioMinimo, Number(salario))
+        salarioMaximo = Math.max(salarioMaximo, Number(salario))
     }
   }
+
   let promedioSalarios = 0;
 
   if (contadorSalariosValidos > 0){
@@ -94,18 +86,3 @@ $calculoSalarios.onclick = function(e){
   e.preventDefault();
 }
 
-function validarSalarios(valorSalarios){
-  for (let i = 0; i < valorSalarios.length; i++) {
-      let salario = Number(valorSalarios[i].trim()); // Convertir a número y quitar espacios en blanco
-      if (salario <= 0 || isNaN(salario)) {
-          return "Los salarios deben ser números enteros positivos mayores que 0";
-      }
-      if (!Number.isInteger(salario)) {
-          return "Los salarios no pueden llevar números decimales";
-      }
-      if (salario > 1000000) {
-          return "Nadie gana más de 1 millón";
-      }
-  }
-  return "";
-}
