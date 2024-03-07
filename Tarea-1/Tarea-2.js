@@ -96,13 +96,16 @@ $calculoSalarios.onclick = function(e){
 
 function validarSalarios(valorSalarios){
   for (let i = 0; i < valorSalarios.length; i++) {
-      if (valorSalarios[i] <= 0 || isNaN(valorSalarios[i])) {
-          return "Los salarios deben ser numeros enteros positivos mayores que 0";
+      let salario = Number(valorSalarios[i].trim()); // Convertir a número y quitar espacios en blanco
+      if (salario <= 0 || isNaN(salario)) {
+          return "Los salarios deben ser números enteros positivos mayores que 0";
       }
-      if (!Number.isInteger(valorSalarios[i])) {
-          return "Los salarios no pueden llevar numeros decimales";
+      if (!Number.isInteger(salario)) {
+          return "Los salarios no pueden llevar números decimales";
+      }
+      if (salario > 1000000) {
+          return "Nadie gana más de 1 millón";
       }
   }
   return "";
 }
-

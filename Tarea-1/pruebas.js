@@ -39,7 +39,7 @@ function probarValidarEdades(){
     )
 
     console.assert(
-        validarEdades([126]) === "Nadie vive más de 125 años",
+        validarEdades(125) === "Nadie vive más de 125 años",
         'Validar Edades no valido que hayan ingresado una edad de menos de 125 anios'
     )
 
@@ -51,27 +51,31 @@ function probarValidarEdades(){
 
 function probarValidarSalarios(){
    
-    console.assert( 
-        validarSalarios([0]) <= "Los salarios deben ser numeros enteros positivos mayores que 0",
+    console.assert(
+        validarSalarios(0) <= "Los salarios deben ser numeros enteros positivos mayores que 0",
         'Validar salarios no valido que el campo no este vacio'
     )
 
     console.assert(
-        validarSalarios([.23]) <= "Los salarios no pueden llevar numeros decimales",
+        validarSalarios(.23) <= "Los salarios no pueden llevar numeros decimales",
         'Validar salarios no valido que solo hayan ingresado decimales'
     )
 
     console.assert(
-        validarSalarios([-1]) <= "Los salarios deben ser numeros enteros positivos mayores que 0",
+        validarSalarios(-1) <= "Los salarios deben ser numeros enteros positivos mayores que 0",
         'Validar salarios no valido que solo hayan ingresado numeros enteros positivos'
     )
 
     console.assert(
-        validarSalarios([340000]) === '',
+        validarSalarios(1000000) > "Nadie gana mas de 1 millon",
+        'Validar salarios no valido que hayan ingresado menos de 1 millon'
+    )
+
+    console.assert(
+        validarSalarios(340000) === '',
         'Validar salarios no funciono con un numero valido'
       )
 }
 
 probarValidarNumeroMiembros()
 probarValidarEdades()
-probarValidarSalarios()
